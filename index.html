@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>WebGL - Rotating Cube</title>
+    <style>
+        body{margin:0;}
+        canvas{
+            width:100%;
+            height:100%;
+        }
+    </style>
+</head>
+<body>
+    <script src="js/three.js"></script>
+    <script>
+        var camera, scene, renderer;
+        var geometry, material, cube;
+
+        init();
+        animate();
+
+        function init() {
+            camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10);
+            camera.position.z = 1;
+
+            scene = new THREE.Scene();
+
+            geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+            material = new THREE.MeshNormalMaterial();
+
+            cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
+
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            cube.rotation.x += 0.03;
+            cube.rotation.y += 0.01;
+
+            renderer.render(scene, camera);
+        }
+
+    </script>
+</body>
+</html>
